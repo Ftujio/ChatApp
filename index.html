@@ -3,12 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>Socket.IO chat</title>
+
     <link rel="stylesheet" href="css/chat.css">
   </head>
   <body>
-    <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+    <div id="page-wrapper">
+      <ul id="messages"></ul>
+      <input id="message-input" autocomplete="off" />
+      <button id="send-button">Send</button>
+    </div>
+
+    <script type="text/javascript" src="lib/socket.io.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>

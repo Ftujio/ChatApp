@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
-const http = require('http').Server(app);
-var io = require('socket.io')(http);
+const server = app.listen(3000, () => {
+  console.log('listening on *:3000');
+});
+const io = require('socket.io').listen(server);
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
@@ -9,6 +11,14 @@ app.get('/', function(req, res){
 
 app.use(express.static('assets'));
 
-app.listen(3000, () => {
-  console.log('listening on *:3000');
+io.on('connection', (socket) => {
+  console.log('a user connected');
+
+  socket.on('chat message', (message) => {
+    io.emit('chat message', message);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('user disconnect');
+  });
 });
