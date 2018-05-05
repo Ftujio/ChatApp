@@ -12,13 +12,13 @@ app.get('/', function(req, res){
 app.use(express.static('assets'));
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log('user ', socket.id, ' connected');
 
   socket.on('chat message', (message) => {
     io.emit('chat message', message);
   });
 
   socket.on('disconnect', () => {
-    console.log('user disconnect');
+    console.log('user ', socket.id, ' disconnected');
   });
 });
