@@ -5,6 +5,8 @@ const messageInput = document.querySelector('#message-input');
 const nameInput = document.querySelector('#name-input');
 const sendButton = document.querySelector('#send-button');
 const messageList = document.querySelector('#messages');
+const colors = ['#0066ff', '#cc33ff', '#cc0000', '#e65c00', '#5353c6'];
+const color = colors[Math.floor(Math.random() * colors.length)];
 
 chatForm.onsubmit = (e) => {
   e.preventDefault();
@@ -15,6 +17,6 @@ chatForm.onsubmit = (e) => {
 
 socket.on('chat message', (message) => {
   let liElement = document.createElement('li');
-  liElement.innerHTML = '<span class="user-name">' + message.name + ': ' + '</span>' + message.message;
+  liElement.innerHTML = '<span class="user-name" style="color: ' + color + '">' + message.name + ': ' + '</span>' + message.message;
   messageList.appendChild(liElement);
 });
