@@ -19,6 +19,7 @@ chatForm.onsubmit = (e) => {
     name = nameInput.value;
     localStorage.setItem('userName', nameInput.value);
     socket.emit('chat message', { name: name, message: messageInput.value, color: color });
+    messageInput.value = '';
   }
 }
 
