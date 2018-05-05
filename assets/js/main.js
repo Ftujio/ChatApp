@@ -18,12 +18,12 @@ chatForm.onsubmit = (e) => {
   if(messageInput.value && nameInput.value) {
     name = nameInput.value;
     localStorage.setItem('userName', nameInput.value);
-    socket.emit('chat message', { name: name, message: messageInput.value});
+    socket.emit('chat message', { name: name, message: messageInput.value, color: color });
   }
 }
 
 socket.on('chat message', (message) => {
   let liElement = document.createElement('li');
-  liElement.innerHTML = '<span class="user-name" style="color: ' + color + '">' + message.name + ': ' + '</span>' + message.message;
+  liElement.innerHTML = '<span class="user-name" style="color: ' + message.color + '">' + message.name + ': ' + '</span>' + message.message;
   messageList.appendChild(liElement);
 });
