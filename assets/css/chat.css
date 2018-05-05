@@ -58,12 +58,14 @@ ul {
 }
 
 #message-input {
-  flex: 9;
+  flex: 8;
   border-bottom-left-radius: 3px;
 }
 
 #name-input {
   margin-left: 3px;
+  flex: 1;
+  width: 150px;
 }
 
 #send-button {
