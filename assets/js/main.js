@@ -23,7 +23,7 @@ chatForm.onsubmit = (e) => {
   }
 }
 
-socket.on('chat message', (message) => {
+socket.on('new message', (message) => {
   let liElement = document.createElement('li');
   liElement.innerHTML = '<span class="user-name" style="color: ' + message.color + '">' + message.name + ': ' + '</span>' + message.message;
   messageList.appendChild(liElement);

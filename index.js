@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
   console.log(connections.map(connection => connection.id));
 
   socket.on('chat message', (message) => {
-    io.emit('chat message', message);
+    io.emit('new message', message);
   });
 
   socket.on('disconnect', () => {
