@@ -86,4 +86,6 @@ ul {
 #messages {
   padding: 5px;
   font-size: 15px;
+  overflow-y: auto;
+  height: calc(100% - 67px);
 }
