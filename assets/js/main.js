@@ -7,11 +7,18 @@ const sendButton = document.querySelector('#send-button');
 const messageList = document.querySelector('#messages');
 const colors = ['#0066ff', '#cc33ff', '#cc0000', '#e65c00', '#5353c6'];
 const color = colors[Math.floor(Math.random() * colors.length)];
+let name = localStorage.getItem('userName');
+
+if(name) {
+  nameInput.value = name;
+}
 
 chatForm.onsubmit = (e) => {
   e.preventDefault();
   if(messageInput.value && nameInput.value) {
-    socket.emit('chat message', { name: nameInput.value, message: messageInput.value});
+    name = nameInput.value;
+    localStorage.setItem('userName', nameInput.value);
+    socket.emit('chat message', { name: name, message: messageInput.value});
   }
 }
 
