@@ -28,3 +28,8 @@ socket.on('chat message', (message) => {
   liElement.innerHTML = '<span class="user-name" style="color: ' + message.color + '">' + message.name + ': ' + '</span>' + message.message;
   messageList.appendChild(liElement);
 });
+
+socket.on('user joined', (users) => {
+  // console.log(users);
+  // users.find(user => user)
+});
