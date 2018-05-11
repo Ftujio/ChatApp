@@ -44,6 +44,10 @@ socket.on('user joined', (users) => {
 
 function appendMessage(message) {
   let liElement = document.createElement('li');
-  liElement.innerHTML = '<span class="user-name" style="color: ' + message.color + '">' + message.name + ': ' + '</span>' + message.message;
+  liElement.innerHTML = '<span class="user-name" style="color: ' + message.color + '">' + encodeHTML(message.name) + ': ' + '</span>' + encodeHTML(message.message);
   messageList.appendChild(liElement);
+}
+
+function encodeHTML(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 }
