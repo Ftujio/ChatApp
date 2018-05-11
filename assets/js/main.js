@@ -8,6 +8,7 @@ const messageList = document.querySelector('#messages');
 const colors = ['#0066ff', '#cc33ff', '#cc0000', '#e65c00', '#5353c6', '#00e6e6', '#99cc00', '#00cc00', '#ffff00'];
 const color = colors[Math.floor(Math.random() * Math.floor(colors.length))];
 let name = localStorage.getItem('userName');
+let loadedMessaged = false;
 
 if(name) {
   nameInput.value = name;
@@ -23,13 +24,26 @@ chatForm.onsubmit = (e) => {
   }
 }
 
+socket.on('messages', (messages) => {
+  if(!loadedMessaged) {
+    messages.forEach(message => {
+      appendMessage(message);
+    });
+    loadedMessaged = true;
+  }
+});
+
 socket.on('new message', (message) => {
-  let liElement = document.createElement('li');
-  liElement.innerHTML = '<span class="user-name" style="color: ' + message.color + '">' + message.name + ': ' + '</span>' + message.message;
-  messageList.appendChild(liElement);
+  appendMessage(message);
 });
 
 socket.on('user joined', (users) => {
   // console.log(users);
   // users.find(user => user)
 });
+
+function appendMessage(message) {
+  let liElement = document.createElement('li');
+  liElement.innerHTML = '<span class="user-name" style="color: ' + message.color + '">' + message.name + ': ' + '</span>' + message.message;
+  messageList.appendChild(liElement);
+}

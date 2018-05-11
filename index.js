@@ -6,6 +6,7 @@ const server = app.listen(3000, () => {
 const io = require('socket.io').listen(server);
 
 let connections = [];
+let messages = [];
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
@@ -17,9 +18,11 @@ io.on('connection', (socket) => {
   console.log('user ', socket.id, ' connected');
   connections.push(socket);
   console.log(connections.map(connection => connection.id));
+  io.emit('messages', messages);
 
   socket.on('chat message', (message) => {
     io.emit('new message', message);
+    messages.push(message);
   });
 
   socket.on('disconnect', () => {
